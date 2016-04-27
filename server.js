@@ -31,14 +31,12 @@ app.get('/', function(req, res) {
 
 //POST /todos
 app.post('/todos', function (req, res) {
-    var body = req.body;
-// if (!_.isBoolean(body.completed) || !_.isString(body.description) || body.description.trim().length === 0)
-    if // (!_.isBoolean(body.completed) ||
-    (!_.isBoolean(body.completed) || !_.isString(body.description) || body.description.trim().length === 0) {
-        console.log("check failed " + body.completed);
+    var body = _.pick(req.body, 'description','completed');
+    if (!_.isBoolean(body.completed) || !_.isString(body.description) || body.description.trim().length === 0) {
         return res.status(400).send();
     }
     body.id = todoNextId++;
+    body.description=body.description.trim();
     todos.push(body);
     // console.log('description ' + body.description);
     res.json(body);
