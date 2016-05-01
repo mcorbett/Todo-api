@@ -12,11 +12,11 @@ app.use(bodyparser.json());
 app.get('/todos', function (req, res){
     var queryParams = req.query;
     var filteredTodos = todos;
-    // if (body.hasOwnProperty('completed') && completed === true) {
-    //     filteredTodos = _.find(filteredTodos, true)
-    // } else if (body.hasOwnProperty('completed') && completed === true) {
-    //     filteredTodos = _.find(filteredTodos, true)
-    // }
+    if (queryParams.hasOwnProperty('completed') && queryParams.completed === 'true') {
+        filteredTodos = _.where(filteredTodos, {completed: true});
+    } else if (queryParams.hasOwnProperty('completed') && queryParams.completed === 'false') {
+        filteredTodos = _.where(filteredTodos, {completed: false});
+    }
     res.json(filteredTodos);
 });
 
