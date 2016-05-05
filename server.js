@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var bodyparser = require('body-parser');
 var _ = require('underscore');
+var db = ('./db.js');
+
 var PORT = process.env.PORT || 3000;
 var todos =[];
 var todoNextId=1;
