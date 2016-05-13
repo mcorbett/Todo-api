@@ -56,27 +56,6 @@ app.post('/todos', function (req, res) {
     });
 });
 
-
-
-    // if (!_.isBoolean(body.completed) || !_.isString(body.description) || body.description.trim().length === 0) {
-    //     return res.status(400).send();
-    // }
-    // body.id = todoNextId++;
-    // body.description=body.description.trim();
-    // todos.push(body);
-    // // console.log('description ' + body.description);
-    // res.json(body);
-  
-
-//     if (!_.isBoolean(body.completed) || !_.isString(body.description) || body.description.trim().length === 0) {
-//         return res.status(400).send();
-//     }
-//     body.id = todoNextId++;
-//     body.description=body.description.trim();
-//     todos.push(body);
-//     res.json(body);
-
-
 app.delete('/todos/:id', function (req, res) {
     var todoId=parseInt(req.params.id, 10);
     var matchedTodo = _.findWhere(todos, {id: todoId});
