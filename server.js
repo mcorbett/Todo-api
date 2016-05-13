@@ -47,14 +47,14 @@ app.get('/', function(req, res) {
 
 //POST /todos
 app.post('/todos', function (req, res) {
-<<<<<<< HEAD
     var body = _.pick(req.body, 'description','completed');
 
     db.todo.create(body).then(function (todo) {
         res.json(todo.toJSON());
     }, function (e) {
-        res.status(400)/json(e);
+        res.status(400).json(e);
     });
+});
 
 
 
@@ -66,15 +66,7 @@ app.post('/todos', function (req, res) {
     // todos.push(body);
     // // console.log('description ' + body.description);
     // res.json(body);
-=======
-  var body = _.pick(req.body, 'description','completed');
-
-  db.todo.create(body).then(function (todo) {
-    res.json(todo.toJSON());
-  }, function (e) {
-  });
->>>>>>> 73279d17903b67d401c1262890bcb7081017f5c5
-});
+  
 
 //     if (!_.isBoolean(body.completed) || !_.isString(body.description) || body.description.trim().length === 0) {
 //         return res.status(400).send();
