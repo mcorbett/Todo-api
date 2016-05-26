@@ -89,7 +89,7 @@ app.delete('/todos/:id', function (req, res) {
                 error: 'No todo with that id'
             });
         } else {
-            res.status(204).send()
+            res.status(204).send();
         }
     }, function () {
         res.status(500).send();
