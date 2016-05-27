@@ -85,6 +85,7 @@ app.delete('/todos/:id', function (req, res) {
         where: {id: todoId}
     }).then(function (rowsDeleted) {
         if (rowsDeleted === 0) {
+            console.log(rowsDeleted);
             res.status(404).json({
                 error: 'No todo with that id'
             });
