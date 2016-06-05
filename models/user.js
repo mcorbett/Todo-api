@@ -5,14 +5,14 @@ module.exports = function(sequelize, DateTypes) {
             allowNull: false,
             unique: true,
             validate: {
-                isMail: true
+                isEmail: true
             }
         },
         password: {
             type:DateTypes.STRING,
             allowNull: false,
             validate: {
-                len: [7,100]
+                len: [7, 100]
             }
         }
     });
