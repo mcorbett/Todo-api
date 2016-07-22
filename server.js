@@ -93,6 +93,11 @@ app.post('/users', function(req, res) {
     });
 });
 
+app.post('/users/login', function(req, res) {
+    var body = _.pick(req.body, 'email','password');
+
+});
+
 app.put('/todos/:id', function (req, res) {
     var todoId=parseInt(req.params.id, 10);
     var body = _.pick(req.body, 'description','completed');
