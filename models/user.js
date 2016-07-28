@@ -2,7 +2,11 @@ var bcrypt = require('bcrypt');
 var _ = require('underscore');
 
 module.exports = function(sequelize, DataTypes) {
+<<<<<<< HEAD
     var user = sequelize.define('user', {
+=======
+    return sequelize.define('user', {
+>>>>>>> aa543a59f4878ee14930d1f9215a6106d3a21a03
         email: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -18,12 +22,20 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING
         },
         password: {
+<<<<<<< HEAD
             type:DataTypes.VIRTUAL,
+=======
+            type: DataTypes.VIRTUAL,
+>>>>>>> aa543a59f4878ee14930d1f9215a6106d3a21a03
             allowNull: false,
             validate: {
                 len: [7, 100]
             },
+<<<<<<< HEAD
             set: function (value) {
+=======
+            set: function(value) {
+>>>>>>> aa543a59f4878ee14930d1f9215a6106d3a21a03
                 var salt = bcrypt.genSaltSync(10);
                 var hashedPassword = bcrypt.hashSync(value, salt);
 
@@ -32,7 +44,11 @@ module.exports = function(sequelize, DataTypes) {
                 this.setDataValue('password_hash', hashedPassword);
             }
         }
+<<<<<<< HEAD
     },{
+=======
+    }, {
+>>>>>>> aa543a59f4878ee14930d1f9215a6106d3a21a03
         hooks: {
             beforeValidate: function(user, options) {
                 if (typeof user.email === 'string') {
@@ -40,6 +56,7 @@ module.exports = function(sequelize, DataTypes) {
                 }
             }
         },
+<<<<<<< HEAD
         classMethods: {
             authenticate: function (body) {
                 return new Promise(function (user, options) {
@@ -66,4 +83,13 @@ module.exports = function(sequelize, DataTypes) {
         }
     });
     return user;
+=======
+        instanceMethods: {
+            toPublicJSON: function() {
+                var json = this.toJSON();
+                return _.pick(json, 'email', 'id', 'createdAt', 'updatedAt');
+            }
+        }
+    });
+>>>>>>> aa543a59f4878ee14930d1f9215a6106d3a21a03
 };
