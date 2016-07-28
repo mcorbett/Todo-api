@@ -97,31 +97,11 @@ app.post('/users', function(req, res) {
 });
 
 app.post('/users/login', function(req, res) {
-<<<<<<< HEAD
-    var body = _.pick(req.body, 'email','password');
-    db.user.authenticate(body).then(function (user) {
-        res.json(user.toPublicJSON());
-    }, function (e) {
-        res.status(401).send();
-=======
     var body = _.pick(req.body, 'email', 'password');
-    if (typeof body.email !== 'string' || typeof body.password !== 'string') {
-        return res.status(400).send();
-    }
-
-    db.user.findOne({
-        where: {
-            email: body.email
-        }
-    }).then(function(user) {
-        if (!user || !bcrypt.compareSync(body.password, user.get('password_hash'))) {
-            console.log('got here');
-            return res.status(401).send();
-        }
+    db.user.authenticate(body).then(function(user) {
         res.json(user.toPublicJSON());
     }, function(e) {
-        res.status(500).send();
->>>>>>> aa543a59f4878ee14930d1f9215a6106d3a21a03
+        res.status(401).send();
     });
 });
 
