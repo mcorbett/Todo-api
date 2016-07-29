@@ -42,21 +42,24 @@ module.exports = function(sequelize, DataTypes) {
         },
         classMethods: {
             authenticate: function(body) {
-                return new Promise(function(user, options) {
+                return new Promise(function(resolve, reject) {
                     if (typeof body.email !== 'string' || typeof body.password !== 'string') {
+                        console.log('failed string');
                         return reject();
                     }
-
                     user.findOne({
                         where: {
                             email: body.email
                         }
                     }).then(function(user) {
                         if (!user || !bcrypt.compareSync(body.password, user.get('password_hash'))) {
+                            console.log('failed compare');
                             return reject();
+
                         }
                         resolve(user);
                     }, function(e) {
+                        console.log('failed error ' + e);
                         reject();
                     });
                 });
