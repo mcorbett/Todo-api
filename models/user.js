@@ -71,24 +71,21 @@ module.exports = function(sequelize, DataTypes) {
                 return _.pick(json, 'email', 'id', 'createdAt', 'updatedAt');
             },
             generateToken: function (type) {
-                if (_.isString(type)) {
+                if (!_.isString(type)) {
                     return undefined;
                 }
                 try {
                     var stringData = JSON.stringify({
                         id: this.get('id'), type: type
                     });
-                    var encryptedData = cryptjs.AES.encrypt(stringData, 'abc123!@#!').toString();
+                    var encryptedData = cryptojs.AES.encrypt(stringData, 'abc123!@#!').toString();
                     var token = jwt.sign({
                         token: encryptedData
-                    }, 'qwert98');
-
+                    }, 'qwerty098');
                     return token;
                 } catch (e) {
                     return undefined;
-
                 }
-
             }
         }
     });
