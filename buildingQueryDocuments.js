@@ -107,19 +107,19 @@ function queryDocument(options) {
     console.log(options);
 
     var query = {
-        "tag_list": regex(/social-networking/)
+        "tag_list": {$regex: "social-networking", $options: 1}
             /* TODO: Complete this statement to match the regular expression "social-networking" */
     };
 
     if (("firstYear" in options) && ("lastYear" in options)) {
+//      "founded_year": {"$exists": true, "$ne": null}
+    query.founded_year = {"$eq": {"founded_year": {"$exists": true, "$ne": null}}
+      };
         /*
            TODO: Write one line of code to ensure that if both firstYear and lastYear
            appear in the options object, we will match documents that have a value for
            the "founded_year" field of companies documents in the correct range.
         */
-        query.founded_year = {
-            "founded_year": options.founded_year
-        };
     } else if ("firstYear" in options) {
         query.founded_year = {
             "$gte": options.firstYear
@@ -131,7 +131,7 @@ function queryDocument(options) {
     }
 
     if ("city" in options) {
-        query["offices.city"] = options.city;
+      query.city = {"offices.city":options.city}
         /*
            TODO: Write one line of code to ensure that we do an equality match on the
            "offices.city" field. The "offices" field stores an array in which each element
