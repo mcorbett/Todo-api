@@ -113,7 +113,7 @@ function queryDocument(options) {
 
     if (("firstYear" in options) && ("lastYear" in options)) {
 //      "founded_year": {"$exists": true, "$ne": null}
-    query.founded_year = {"$eq": {"founded_year": {"$exists": true, "$ne": null}}
+    query.founded_year = {"founded_year": {options.city: {"$exists": true, "$ne": null}}}
       };
         /*
            TODO: Write one line of code to ensure that if both firstYear and lastYear
@@ -131,13 +131,14 @@ function queryDocument(options) {
     }
 
     if ("city" in options) {
-      query.city = {"offices.city":options.city}
-        /*
-           TODO: Write one line of code to ensure that we do an equality match on the
-           "offices.city" field. The "offices" field stores an array in which each element
-           is a nested document containing fields that describe a corporate office. Each office
-           document contains a "city" field. A company may have multiple corporate offices.
-        */
+    query.offices = { "$elemMatch": {"city": options.city} };
+    //   query.city = {options.city: {"$elemMatch": ["offices.city"]}}
+    //     /*
+    //        TODO: Write one line of code to ensure that we do an equality match on the
+    //        "offices.city" field. The "offices" field stores an array in which each element
+    //        is a nested document containing fields that describe a corporate office. Each office
+    //        document contains a "city" field. A company may have multiple corporate offices.
+    //     */
     }
 
     return query;
