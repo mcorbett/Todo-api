@@ -131,6 +131,8 @@ function queryDocument(options) {
 
     if ("city" in options) {
         query["offices.city"] = {"$eq":options.city};
+
+        query["$or"] = [{"tag_list":{"$regex": options.overview, "$options": "1"}},{"overview":{"$regex": options.overview, "$options": "1"}}];
         /*
            TODO: Write one line of code to ensure that we do an equality match on the
            "offices.city" field. The "offices" field stores an array in which each element
